@@ -12,8 +12,8 @@ use App\Information;
 class DoctorController extends Controller
 {
     public function index(){
-        $pres = Prescription::where('doctor_id', $user = Sentinel::getUser()->id)->whereNotNull('message')->get();
-    	//dd($pres->prescription());
+        $pres = Prescription::where('doctor_id', $user = Sentinel::getUser()->id)->get();
+    	//dd($pres);
         return view('doctor.index')->withPres($pres);
     }
     public function profileUpdate(){

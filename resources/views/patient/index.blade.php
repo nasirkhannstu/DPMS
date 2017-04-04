@@ -47,14 +47,24 @@
                                 </thead>
                                 <tbody>
                                     @foreach($pres as $pre)
-                                    @if(!empty($pre->syntoms))
-                                    <tr>
-                                        <td><span class="label bg-green">{{$pre->id}}</span></td>
-                                        <td>{{$pre->syntoms}}</td>
-                                        <td>{{$pre->created_at}}</td>
-                                    </tr>
-                                    @endif
+                                        @if(!empty($pre->syntoms))
+                                        <tr>
+                                            <td>{{$pre->id}}</td>
+                                            <td>{{$pre->syntoms}}</td>
+                                            <td>{{$pre->created_at}}</td>
+                                        </tr>
+                                        @endif
                                     @endforeach
+                                    <tr>
+                                            <td>12</td>
+                                            <td>akshd akdjhf</td>
+                                            <td>2017-03-26 18:25:27</td>
+                                        </tr>
+                                        <tr>
+                                            <td>16</td>
+                                            <td>asd asdas</td>
+                                            <td>2017-03-26 18:30:27</td>
+                                        </tr>
                                 </tbody>
                             </table>
                         </div>

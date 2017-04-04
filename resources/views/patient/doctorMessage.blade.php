@@ -54,10 +54,9 @@
                             <div class="row control-group">
                                 <div class="col-md-6 col-md-offset-3">
                                     <div class="input-group">
-                                        <div class="form-line">
-                                            <textarea class="form-control" name="message" placeholder="Write Message" required></textarea>
-                                        </div>
+                                        <textarea class="form-control" name="message" placeholder="Write Message" style="width:300px" required></textarea>
                                     </div>
+                                    <br>
                                     <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Send Message</button>
                                     <br>
                                 </div>

@@ -41,9 +41,8 @@
                         <div class="row control-group">
                             <div class="col-md-6 col-md-offset-3">
                                 <div class="input-group">
-                                    <div class="form-line">
-                                        <input type="text" name="search" class="form-control searchname"  placeholder="Search...">
-                                    </div>
+                                        <input type="text" name="search" class="form-control searchname" style="height:50px" placeholder="Search...">
+                                    
                                     <span class="input-group-addon">
                                         <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
                                     </span>
@@ -67,7 +66,7 @@
                                 <tbody>
                                     @foreach($doctors as $doc)
                                     <tr>
-                                        <td><span class="label bg-green">{{$doc->id}}</span></td>
+                                        <td>{{$doc->id}}</td>
                                         <td>{{$doc->first_name }} {{ $doc->last_name}}</td>
                                         <td>{{@$doc->doctor->workplace}}</td>
                                         <td>{{@$doc->doctor->speciality}}</td>

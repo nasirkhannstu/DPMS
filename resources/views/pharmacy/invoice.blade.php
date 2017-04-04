@@ -12,7 +12,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                 <div class="card">
                     <div class="header">
-                        <h2>Prescription's</h2>
+                        <h2>Invoice</h2>
                     </div>
                     <div class="body">
                       <div class="row">
@@ -50,7 +50,7 @@
                                 <tr>
                                   <td colspan="2"></td>
                                   <td align="right">Total: </td>
-                                  <td align="center"><span id="total" class="total">TOTAL</span>Taka 
+                                  <td align="center"><u><span id="total" class="total">TOTAL</span></u> Taka
                                   </td> 
                                 </tr>
                               </tbody>
@@ -66,5 +66,25 @@
 </section>
 @endsection
 @section('script')
-
+<script type="text/javascript">
+    function calculator() {
+        var amt = $('.amount:gt(0)'),
+            tot = $('#total');
+        amt.text(function () {
+            var tr = $(this).closest('tr');
+            var qty = tr.find('.qty').val();
+            var price = tr.find('.price').html();
+            return parseFloat(qty) * parseFloat(price);
+        });
+        tot.text(function () {
+            var sum = 0;
+            amt.each(function () {
+                sum += parseFloat($(this).text())
+            });
+            return sum;
+        });
+    }
+    calculator();
+    $('.qty,.price').change(calculator);
+</script>
 @endsection
