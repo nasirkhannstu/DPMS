@@ -31,7 +31,7 @@ Route::group(['middleware' => 'visitors'], function(){
 Route::post('/logout', 'LoginController@logout');
 
 			//Doctor Users
-Route::group(['middleware' => 'doctor'], function(){
+Route::group(['middleware' => 'user'], function(){
 
 	Route::get('doctor', 'DoctorController@index');
 	Route::get('doctor/edit-info','DoctorController@profileUpdate')->name('editInfo');
@@ -42,7 +42,7 @@ Route::group(['middleware' => 'doctor'], function(){
 });
 
 
-Route::group(['middleware' => 'patient'], function(){
+Route::group(['middleware' => 'user'], function(){
 	Route::get('/patient', 'PatientController@index');
 	Route::get('patient/find-doctor','PatientController@getFindDoctor')->name('getFindDoctor');
 	Route::post('patient/Search-Doctor','PatientController@postFindDoctor')->name('postFindDoctor');
@@ -58,7 +58,7 @@ Route::group(['middleware' => 'user'], function(){
 });
 
 
-Route::group(['middleware' => 'pharmacy'], function(){
+Route::group(['middleware' => 'user'], function(){
 	Route::get('/pharmacy', 'PharmacyController@index');
 	Route::get('/pharmacy/invoice/{id}','PharmacyController@invoice')->name('invoice');
 	Route::get('/pharmacy/sell','PharmacyController@sell')->name('sell');
