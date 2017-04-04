@@ -24,6 +24,8 @@
                         </div>
                       </div>
                       <div class="table-responsive">
+                        <form action="{{route('sell')}}" method="POST">
+                          {{ csrf_field() }}
                           <table class="table table-hover dashboard-task-infos">
                               <thead>
                                   <tr>
@@ -38,7 +40,7 @@
                                   <tr>
                                     <td>{{ $medic['item']['name'] }}</td>
                                     <td>
-                                      <input type="number" value="{{ $medic['qty']}}" class="qty">
+                                      <input type="number" value="{{ $medic['qty']}}" class="qty">({{ $medic['item']['qty'] }})
                                     </td>
                                     <td>
                                       <span id="price" class="price">{{ $medic['item']['price'] }}</span>
@@ -55,6 +57,8 @@
                                 </tr>
                               </tbody>
                           </table>
+                          <input type="submit" class="btn btn-success" value="Sell">
+                        </form>
                       </div>
                     </div>
                 </div>
@@ -66,25 +70,5 @@
 </section>
 @endsection
 @section('script')
-<script type="text/javascript">
-    function calculator() {
-        var amt = $('.amount:gt(0)'),
-            tot = $('#total');
-        amt.text(function () {
-            var tr = $(this).closest('tr');
-            var qty = tr.find('.qty').val();
-            var price = tr.find('.price').html();
-            return parseFloat(qty) * parseFloat(price);
-        });
-        tot.text(function () {
-            var sum = 0;
-            amt.each(function () {
-                sum += parseFloat($(this).text())
-            });
-            return sum;
-        });
-    }
-    calculator();
-    $('.qty,.price').change(calculator);
-</script>
+
 @endsection

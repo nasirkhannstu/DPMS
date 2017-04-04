@@ -61,6 +61,7 @@ Route::group(['middleware' => 'user'], function(){
 Route::group(['middleware' => 'pharmacy'], function(){
 	Route::get('/pharmacy', 'PharmacyController@index');
 	Route::get('/pharmacy/invoice/{id}','PharmacyController@invoice')->name('invoice');
+	Route::get('/pharmacy/sell','PharmacyController@sell')->name('sell');
 	Route::get('/pharmacy/getPrice/{id}','PharmacyController@getPrice');
 });
 

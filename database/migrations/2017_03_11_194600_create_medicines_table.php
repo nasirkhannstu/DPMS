@@ -19,6 +19,7 @@ class CreateMedicinesTable extends Migration
             $table->string('brand')->nullable();
             $table->string('category')->nullable();
             $table->integer('price')->nullable();
+            $table->integer('qty')->nullable();
             $table->timestamps();
         });
     }
