@@ -16,14 +16,14 @@ class DoctorMiddleware
      */
     public function handle($request, Closure $next)
     {
-        // if(Sentinel::check() && $hasRole = Sentinel::getUser()->roles()->first()){
-        //     if($hasRole->slug == 'doctor'){
-        //         return $next($request);
-        //     }else{
-        //         return redirect('/');
-        //     }
-        // }
-        // else
+        if(Sentinel::check() && $hasRole = Sentinel::getUser()->roles()->first()){
+            if($hasRole->slug == 'doctor'){
+                return $next($request);
+            }else{
+                return redirect('/');
+            }
+        }
+        else
             return redirect('/');
     }
 }
