@@ -11,6 +11,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                 <div class="card">
+                  @include ('partials._message')
                     <div class="header">
                         <h2>Invoice</h2>
                     </div>
@@ -24,7 +25,7 @@
                         </div>
                       </div>
                       <div class="table-responsive">
-                        <form action="{{route('sell')}}" method="POST">
+                        <form action="{{route('sell', $id)}}" method="POST">
                           {{ csrf_field() }}
                           <table class="table table-hover dashboard-task-infos">
                               <thead>
@@ -36,23 +37,26 @@
                                   </tr>
                               </thead>
                               <tbody>
-                                @foreach($medics as $key => $medic)
+                                @foreach($medics as $medic)
                                   <tr>
-                                    <td>{{ $medic['item']['name'] }}</td>
                                     <td>
-                                      <input type="number" value="{{ $medic['qty']}}" class="qty">({{ $medic['item']['qty'] }})
+                                    <input type="text" name="mdcns[id][]" value="{{$medic['item']['name']}}">
+                                    </td>
+                                    <td>
+                                      <input type="number" name="mdcns[qty][]" value="{{ $medic['qty']}}" class="qty">({{ $medic['item']['qty'] }})
                                     </td>
                                     <td>
                                       <span id="price" class="price">{{ $medic['item']['price'] }}</span>
                                     </td>
-                                    <td align="center"><span id="amount" class="amount">0</span>    Taka
+                                    <td align="center"><span id="amount" class="amount">0</span> Taka
                                     </td>
                                   </tr>
                                 @endforeach
                                 <tr>
                                   <td colspan="2"></td>
                                   <td align="right">Total: </td>
-                                  <td align="center"><u><span id="total" class="total">TOTAL</span></u> Taka
+                                  <td align="center"><u>
+                                  <input type="text" name="total" value="0" id="total" class="total" desebaled> Taka
                                   </td> 
                                 </tr>
                               </tbody>
@@ -70,5 +74,25 @@
 </section>
 @endsection
 @section('script')
-
+<script type="text/javascript">
+    function calculator() {
+        var amt = $('.amount:gt(0)'),
+            tot = $('#total');
+        amt.text(function () {
+            var tr = $(this).closest('tr');
+            var qty = tr.find('.qty').val();
+            var price = tr.find('.price').html();
+            return parseFloat(qty) * parseFloat(price);
+        });
+        tot.val(function () {
+            var sum = 0;
+            amt.each(function () {
+                sum += parseFloat($(this).text())
+            });
+            return sum;
+        });
+    }
+    calculator();
+    $('.qty,.price').change(calculator);
+</script>
 @endsection

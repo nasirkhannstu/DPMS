@@ -32,6 +32,25 @@ class PharmacyController extends Controller
             $med[] = ['qty'=>$v['qty'], 'item'=> Medicine::find($v['id'])];
         }
         //dd($med);
-        return view('pharmacy.invoice')->withMedics($med);
+        return view('pharmacy.invoice')->withMedics($med)->withId($id);
+    }
+    public function sell(Request $request, $id){
+        $this->validate($request, [
+            'mdcns.id.*' => 'required|max:255',
+            'mdcns.qty.*' => 'required|max:255',
+            'total' => 'integer|required'
+        ]);
+        $med = array();
+        foreach($request['mdcns']['id'] as $key => $v){
+            $med[] = ['qty'=>$request['mdcns']['qty'][$key], 'item'=> Medicine::where('name', "=", $v)->first()];
+        }
+        //dd($medicine->qty - $v['qty']);
+        foreach($med as $key => $v){
+            $medicine = Medicine::find($v['item']['id']);
+            $medicine->qty = $medicine->qty - $v['qty'];
+            $medicine->save();
+        }
+        
+        return redirect()->route('pharmacy');
     }
 }

@@ -59,10 +59,9 @@ Route::group(['middleware' => 'user'], function(){
 
 
 Route::group(['middleware' => 'user'], function(){
-	Route::get('/pharmacy', 'PharmacyController@index');
+	Route::get('/pharmacy', 'PharmacyController@index')->name('pharmacy');
 	Route::get('/pharmacy/invoice/{id}','PharmacyController@invoice')->name('invoice');
-	Route::get('/pharmacy/sell','PharmacyController@sell')->name('sell');
-	Route::get('/pharmacy/getPrice/{id}','PharmacyController@getPrice');
+	Route::post('/pharmacy/sell/{id}','PharmacyController@sell')->name('sell');
 });
 
 Route::get('/activation/{email}/{activationCode}', 'ActivationController@activate');
