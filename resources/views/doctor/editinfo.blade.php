@@ -11,13 +11,15 @@
         @include ('partials._message')
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="login-box">
-                <div class="panel panel-danger" style="padding:10px">
+                <div class="panel panel-info" style="padding:10px">
                     <div class="panel-heading">
                         <h3 class="panel-title">Account Info</h3> 
                     </div>
                     <form method="POST" action="{{route('postAccountInfo')}}">
                         {{ csrf_field() }}
+                        <br>
                         <h4><b>Email: </b>{{Sentinel::getUser()->email}}</h4>
+                        <br>
                         <div class="input-group">
                             <div class="form-line">
                                 <input type="text" name="first_name" class="form-control" value="{{Sentinel::getUser()->first_name}}" required>
@@ -33,7 +35,7 @@
                         <br>
                         <div class="row">
                             <div class="col-xs-4">
-                                <button class="btn btn-block bg-green waves-effect" type="submit">Update Info</button>
+                                <button class="btn btn-block btn-info" type="submit">Update Info</button>
                             </div>
                         </div>
                     </form>
@@ -42,7 +44,7 @@
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
             <div class="login-box">
-                <div class="panel panel-danger" style="padding:10px">
+                <div class="panel panel-info" style="padding:10px">
                     <div class="panel-heading">
                         <h3 class="panel-title">Account Info</h3> 
                     </div>
@@ -54,7 +56,7 @@
                                 <label>Speciality</label>
                                 <input type="text" name="speciality" 
                                 @if($doctor)
-                                Value="{!! $doctor->speciality !!}"
+                                Value="{{ $doctor->speciality }}"
                                 @endif
                                 class="form-control" placeholder="Epeciality" required>
                             </div>
@@ -69,91 +71,10 @@
                         <br>
                         <div class="row">
                             <div class="col-xs-4">
-                                <button class="btn btn-block bg-green waves-effect" type="submit">Add/Edit Profession</button>
+                                <button class="btn btn-block btn-info" type="submit">Add/Edit Profession</button>
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-2">
-            <div class="login-box">
-                <div class="card">
-                    <div class="body">
-                        <form method="POST" action="{{route('postPersonalInfo')}}" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            <h1>Personal Info</h1><br>
-                            <div class="input-group">
-                                <label>Gender</label>
-                                <select class="form-control show-tick" name="gender">
-                                    <option value="">-- Please select --</option>
-                                    <option value="Male" 
-                                        @if($docinfo)
-                                            @if($docinfo->gender == 'Male')
-                                                selected 
-                                            @endif
-                                        @endif 
-                                        >Male</option>
-                                    <option value="Female"
-                                        @if($docinfo)
-                                            @if($docinfo->gender == 'Female')
-                                                selected 
-                                            @endif
-                                        @endif 
-                                    >Female</option>
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <label>Permanent Address</label>
-                                <div class="form-line">
-                                    <textarea class="form-control" name="address" placeholder="Address" required>@if($docinfo) {!! $docinfo->address !!} @endif </textarea>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <label>Present Address</label>
-                                <div class="form-line">
-                                    <textarea class="form-control" name="paddress" placeholder="Present Address" required>@if($docinfo){{ $docinfo->paddress }} @endif </textarea>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">profession</i>
-                                </span>
-                                <div class="form-line">
-                                    <label>Profession</label>
-                                    <input type="text" name="profession" 
-                                    @if($docinfo)
-                                    Value="{!! $docinfo->profession !!}"
-                                    @endif
-                                    class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="material-icons">phone</i>
-                                </span>
-                                <div class="form-line">
-                                    <label>Phone No</label>
-                                    <input type="text" name="phone" 
-                                    @if($docinfo)
-                                    Value="{!! $docinfo->phone !!}"
-                                    @endif
-                                    class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <label>Profile Picture</label>
-                                <input type="file" name="photo" class="form-control">
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-4">
-                                    <button class="btn btn-block bg-green waves-effect" type="submit">Add/Edit Information</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>

@@ -23,7 +23,6 @@
                             {{ csrf_field() }}
                         </form>
                     </li>
-                    <li><a href="javascript:void(0);">Profile</a></li>
                     
                 @else
                     <li><a href="/login">Login</a></li>

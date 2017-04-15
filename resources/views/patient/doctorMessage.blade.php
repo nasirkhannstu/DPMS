@@ -3,9 +3,6 @@
 @section('content')
 <section class="content">
     <div class="container-fluid">
-        <!-- <div class="block-header">
-            <h2>DASHBOARD</h2>
-        </div> -->
         <div class="row clearfix">
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
             <div class="thumbnail">
@@ -20,9 +17,6 @@
                         {{ Sentinel::getUser()->email }}
                     </p>
                     <p>
-                        <a href="{{route('editInfo')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a>
-                    </p>
-                    <p>
                         <a href="{{route('getFindDoctor')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-search"></span> Find Doctor</a>
                     </p>
                 </div>
@@ -33,28 +27,18 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                 <div class="card">
                     <div class="header">
-                        <h3>Send Message</h3>
+                        <h3>Send Message to ({{$user->first_name}} {{$user->last_name}})</h3>
                     </div>
+                    <hr>
                     <div class="body">
-                        <div class="row">
-                            @include ('partials._message')
-                            <div class="col-md-6">
-                                <h4>{{$user->first_name}} {{$user->first_name}}</h4>
-                                <p>{{$user->email}}</p>
-                            </div>
-                            <div class="col-md-6">
-                                <h4><b>Speciality:</b> {{$user->doctor->speciality}}</h4>
-                                <p><b>Work Place:</b> {{$user->doctor->workplace}}</p>
-                            </div>
-                        </div>
-                    
+                        <br>
                         <div class="search" style="margin-top:10px">
                             <form action="{{route('postMessageDoctor', $user->id)}}" method="POST">
                                 {{ csrf_field() }}
                             <div class="row control-group">
-                                <div class="col-md-6 col-md-offset-3">
+                                <div class="col-md-6 col-md-offset-2">
                                     <div class="input-group">
-                                        <textarea class="form-control" name="message" placeholder="Write Message" style="width:300px" required></textarea>
+                                        <textarea class="form-control" name="message" placeholder="Write Message" style="width:400px;height:150px" required></textarea>
                                     </div>
                                     <br>
                                     <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-edit"></span> Send Message</button>

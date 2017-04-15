@@ -62,6 +62,9 @@ Route::group(['middleware' => 'user'], function(){
 	Route::get('/pharmacy', 'PharmacyController@index')->name('pharmacy');
 	Route::get('/pharmacy/invoice/{id}','PharmacyController@invoice')->name('invoice');
 	Route::post('/pharmacy/sell/{id}','PharmacyController@sell')->name('sell');
+
+	
+	Route::resource('/pharmacy/medicine','MedicineController');
 });
 
 Route::get('/activation/{email}/{activationCode}', 'ActivationController@activate');

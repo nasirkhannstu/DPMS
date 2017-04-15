@@ -18,11 +18,12 @@ class DoctorController extends Controller
     }
     public function profileUpdate(){
     	$user = Sentinel::getUser()->id;
-        $doctor = Doctor::find($user);
-    	$docinfo = Information::find($user);
-    	if(!isset($doctor)){
-    		$doctor = false;
-    	}
+        $doctor = Doctor::where('user_id', '=', $user)->first();
+        //dd($doctor);
+        $docinfo = Information::find($user);
+        if(!isset($doctor)){
+            $doctor = false;
+        }
         if(!isset($docinfo)){
             $docinfo = false;
         }

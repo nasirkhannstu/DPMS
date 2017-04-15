@@ -20,9 +20,6 @@
                         {{ Sentinel::getUser()->email }}
                     </p>
                     <p>
-                        <a href="{{route('editInfo')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a>
-                    </p>
-                    <p>
                         <a href="{{route('getFindDoctor')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-edit"></span> Find Doctor</a>
                     </p>
                 </div>

@@ -20,9 +20,6 @@
                         {{ Sentinel::getUser()->email }}
                     </p>
                     <p>
-                        <a href="{{route('editInfo')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a>
-                    </p>
-                    <p>
                         <a href="{{route('getFindDoctor')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-edit"></span> Find Doctor</a>
                     </p>
                 </div>
@@ -42,6 +39,7 @@
                                     <tr>
                                         <th>#ID</th>
                                         <th>Syntoms</th>
+                                        <th>Medications</th>
                                         <th>Date</th>
                                     </tr>
                                 </thead>
@@ -51,20 +49,17 @@
                                         <tr>
                                             <td>{{$pre->id}}</td>
                                             <td>{{$pre->syntoms}}</td>
+                                            <td><?php 
+                                                $medic = $pre->medications;
+                                                $medic = unserialize($medic);
+                                                foreach($medic as $meds){
+                                                    echo $meds['name']."(".$meds['qty']."), ";
+                                                }
+                                             ?></td>                               
                                             <td>{{$pre->created_at}}</td>
                                         </tr>
                                         @endif
                                     @endforeach
-                                    <tr>
-                                            <td>12</td>
-                                            <td>akshd akdjhf</td>
-                                            <td>2017-03-26 18:25:27</td>
-                                        </tr>
-                                        <tr>
-                                            <td>16</td>
-                                            <td>asd asdas</td>
-                                            <td>2017-03-26 18:30:27</td>
-                                        </tr>
                                 </tbody>
                             </table>
                         </div>

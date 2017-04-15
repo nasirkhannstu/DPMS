@@ -23,7 +23,7 @@
                         <a href="{{route('editInfo')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a>
                     </p>
                     <p>
-                        <a href="{{route('getPrescription')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-edit"></span> Add New Prescription</a>
+                        <a href="{{route('getPrescription')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-edit"></span> New Prescription</a>
                     </p>
                 </div>
             </div>

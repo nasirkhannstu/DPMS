@@ -20,9 +20,6 @@
                         {{ Sentinel::getUser()->email }}
                     </p>
                     <p>
-                        <a href="{{route('editInfo')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-edit"></span> Edit Profile</a>
-                    </p>
-                    <p>
                         <a href="{{route('getFindDoctor')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-search"></span> Find Doctor</a>
                     </p>
                 </div>
@@ -42,7 +39,7 @@
                             <div class="col-md-6 col-md-offset-3">
                                 <div class="input-group">
                                     <div class="form-line">
-                                        <input type="text" name="search" class="form-control searchname"  placeholder="Search...">
+                                        <input type="text" name="search" class="form-control searchname" style="height:50px"  placeholder="Search...">
                                     </div>
                                     <span class="input-group-addon">
                                         <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
@@ -68,17 +65,14 @@
                                     @foreach($doctors as $doc)
                                     <tr>
                                         <td><span class="label bg-green">{{$doc->id}}</span></td>
-                                        <td>{{$doc->first_name }} {{ $doc->last_name}}</td>
-                                        <td>{{@$doc->doctor->workplace}}</td>
-                                        <td>{{@$doc->doctor->speciality}}</td>
-                                        <td class="btn btn-default"><a href="{{route('messageDoctor', $doc->id) }}">Message</a></td>
+                                        <td>{{$doc->user->first_name }} {{ $doc->user->last_name}}</td>
+                                        <td>{{@$doc->workplace}}</td>
+                                        <td>{{@$doc->speciality}}</td>
+                                        <td class="btn btn-default"><a href="{{route('messageDoctor', $doc->user_id) }}">Message</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            <div class="text-center">
-                                {!! $doctors->links() !!}
-                            </div>
                         </div>
                     </div>
                 </div>
