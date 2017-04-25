@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Prescription;
 use App\Doctor;
 use App\User;
+use App\Medicine;
 use Sentinel;
 
 class PatientController extends Controller
@@ -13,6 +14,17 @@ class PatientController extends Controller
     public function index(){
     	$pres = Prescription::where('patient_id', '=', Sentinel::getUser()->id)->get();
     	return view('patient.index')->withPres($pres);
+    }
+    public function presview($id){
+        $pre = Prescription::find($id);
+        $medic = $pre->medications;
+        $medic = unserialize($medic);
+
+        $med = array();
+        foreach($medic as $key => $v){
+            $med[] = ['qty'=>$v['qty'], 'remaining'=>$v['remaining'], 'item'=> Medicine::find($v['id'])];
+        }
+        return view('patient.presview')->withMedics($med)->withId($id);
     }
     public function getFindDoctor(){
     	$role = Sentinel::findRoleBySlug('doctor');

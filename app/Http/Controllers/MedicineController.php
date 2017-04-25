@@ -16,7 +16,6 @@ class MedicineController extends Controller
     public function index()
     {
         $medicines = Medicine::orderBy('id','desc')->paginate(20);
-
         return view('pharmacy.indexMedicines')->withMedicines($medicines);
     }
 

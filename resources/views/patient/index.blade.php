@@ -29,6 +29,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                 <div class="card">
+                    @include ('partials._message')
                     <div class="header">
                         <h3>Your Prescriptions</h3>
                     </div>
@@ -40,7 +41,7 @@
                                         <th>#ID</th>
                                         <th>Syntoms</th>
                                         <th>Medications</th>
-                                        <th>Date</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,7 +57,10 @@
                                                     echo $meds['name']."(".$meds['qty']."), ";
                                                 }
                                              ?></td>                               
-                                            <td>{{$pre->created_at}}</td>
+                                            <td>
+                                            <a href="{{route('pres.view', $pre->id)}}">View</a>
+                                            <a href="{{route('patient.complain', $pre->doctor_id)}}">Complain</a>
+                                            </td>
                                         </tr>
                                         @endif
                                     @endforeach

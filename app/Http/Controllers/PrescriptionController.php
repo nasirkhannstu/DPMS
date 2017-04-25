@@ -29,18 +29,18 @@ class PrescriptionController extends Controller
         $id = $request->id;
         $medic = array();
         foreach($name as $key => $v){
-            $medic[] = ['name'=>$v, 'qty'=>$qty[$key], 'id'=>$id[$key],];
+            $medic[] = ['name'=>$v, 'qty'=>$qty[$key], 'remaining'=>$qty[$key], 'id'=>$id[$key]];
         }
         //dd($medic);
         $string = serialize($medic);
     	$pres = new Prescription;
-    	$pres->doctor_id = Sentinel::getUser()->id;
+    	$pres->doctor_id = Sentinel::getUser()->doctor->id;
     	$pres->patient_id = $request->patient_id;
     	$pres->syntoms = $request->syntoms;
     	$pres->medications = $string;
     	$pres->save();
 
-        return redirect()->back()->with(['success' => 'Updated Successfully.']);
+        return redirect()->route('doctor.index')->with(['success' => 'Prescription successfully created.']);
     }
     public function findMedicine(Request $request){
     	// $this->validate($request, [

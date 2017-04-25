@@ -13,6 +13,15 @@
                     <ul class="dropdown-menu pull-right">
                 @if(Sentinel::check())
                     <li>
+                        @if(Sentinel::getUser()->roles()->first()->slug == 'doctor')
+                        <a href="{{url('/doctor')}}">HOME</a>
+                        @elseif(Sentinel::getUser()->roles()->first()->slug == 'patient')
+                        <a href="{{url('/patient')}}">HOME</a>
+                        @elseif(Sentinel::getUser()->roles()->first()->slug == 'store')
+                        <a href="{{url('/pharmacy')}}">HOME</a>
+                        @endif
+                    </li>
+                    <li>
                         <a href="#"
                             onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
@@ -23,7 +32,6 @@
                             {{ csrf_field() }}
                         </form>
                     </li>
-                    
                 @else
                     <li><a href="/login">Login</a></li>
                     <li><a href="/register">Register</a></li>

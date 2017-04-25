@@ -27,7 +27,7 @@ $factory->define(App\Medicine::class, function (Faker\Generator $faker) {
         'name' => $faker->word,
         'brand' => $faker->word,
         'category' => $faker->word,
-        'price' => $faker->randomFloat(2, 1, 100)
+        'price' => $faker->randomFloat(2, 1, 100),
         'qty' => $faker->randomFloat(2, 1, 50)
     ];
 });

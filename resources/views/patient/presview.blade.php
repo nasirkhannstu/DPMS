@@ -7,7 +7,7 @@
             <h2>DASHBOARD</h2>
         </div> -->
         <div class="row clearfix">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-8 col-md-offset-2">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                 <div class="card">
@@ -33,7 +33,6 @@
                                       <th>Name</th>
                                       <th>Amount</th>
                                       <th>Remaining</th>
-                                      <th>Available</th>
                                       <th>Price</th>
                                       <th><span id="amount" class="amount">Total</span></th>
                                   </tr>
@@ -42,51 +41,29 @@
                                 @foreach($medics as $medic)
                                   <tr>
                                     <td>
-                                    <input type="text" name="mdcns[id][]" value="{{$medic['medicine']['name']}}">
+                                    {{$medic['item']['name']}}
                                     </td>
                                     <td>
                                       {{ $medic['qty']}}
                                     </td>
                                     <td>
-                                      <input name="mdcns[qty][]" 
-                                      @if($medic['item'])
-                                      value="{{ $medic['remaining']}}" type="number" 
-                                      @else
-                                      value="0" type="hidden" 
-                                      @endif 
-                                      class="qty">
+                                      <input type="hidden" name="mdcns[qty][]" value="{{ $medic['remaining']}}" class="qty">{{ $medic['remaining']}}
                                     </td>
                                     <td>
-                                      @if($medic['item'])
-                                      {{$medic['item']['qty']}}
-                                      @else
-                                      Null
-                                      @endif
+                                      <span id="price" class="price">{{ $medic['item']['price'] }}</span>
                                     </td>
-                                    <td>
-                                      <span id="price" class="price">
-                                      @if($medic['item'])
-                                        {{ $medic['medicine']['price'] }}
-                                      @else
-                                      0
-                                      @endif
-                                      </span>
-                                    </td>
-                                    <td align="center"><span id="amount" class="amount">0</span> Taka
+                                    <td><span id="amount" class="amount">0</span> Taka
                                     </td>
                                   </tr>
                                 @endforeach
                                 <tr>
-                                  <td colspan="4"></td>
+                                  <td colspan="3"></td>
                                   <td align="right">Total: </td>
-                                  <td align="center"><u>
-                                  <input type="text" name="total" value="0" id="total" class="total">
+                                  <td><span id="total">0</span> Taka
                                   </td> 
                                 </tr>
                               </tbody>
                           </table>
-                          <input type="submit" class="btn btn-success" value="Sell">
-                        </form>
                       </div>
                     </div>
                 </div>
@@ -108,7 +85,7 @@
             var price = tr.find('.price').html();
             return parseFloat(qty) * parseFloat(price);
         });
-        tot.val(function () {
+        tot.html(function () {
             var sum = 0;
             amt.each(function () {
                 sum += parseFloat($(this).text())

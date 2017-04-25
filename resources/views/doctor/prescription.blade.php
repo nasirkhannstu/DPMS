@@ -1322,7 +1322,7 @@ a.ui-button:active,
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-8 col-lg-offset-2 col-md-offset-2">
                 <div class="login-box">
-                    <div class="card panel panel-danger" style="padding:10px">
+                    <div class="card panel panel-info" style="padding:10px">
                         <div class="panel-heading"> 
                             <h3 class="panel-title">Prescription</h3> 
                         </div> 
@@ -1367,7 +1367,7 @@ a.ui-button:active,
     <div class="col-md-4">
         <div class="input-group">
         <div class="form-line">
-            <input type="text" name="qty[]" class="form-control" placeholder="name">
+            <input type="text" name="qty[]" class="form-control" placeholder="Quantiry">
         </div>
         </div>
     </div>
@@ -1412,7 +1412,7 @@ a.ui-button:active,
     $('#add-more').on('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
-        $('<p><div class="row control-group"><div class="col-md-6"><div class="input-group"><div class="form-line"><input type="text" name="name[]" class="form-control searchname"  placeholder="Search..." id="searchname_' + i + '"></div></div></div><div class="col-md-4"><div class="input-group"><div class="form-line"><input type="text" name="qty[]" id="name_' + i + '" class="form-control" placeholder="name"></div></div></div><div class="col-md-2"><a href="#" class="btn btn-danger remove">Remove</a></div>       <input type="number" name="id[]" id="id_' + i + '" hidden></div></p>'
+        $('<p><div class="row control-group"><div class="col-md-6"><div class="input-group"><div class="form-line"><input type="text" name="name[]" class="form-control searchname"  placeholder="Search..." id="searchname_' + i + '"></div></div></div><div class="col-md-4"><div class="input-group"><div class="form-line"><input type="text" name="qty[]" id="name_' + i + '" class="form-control" placeholder="Quantiry"></div></div></div><div class="col-md-2"><a href="#" class="btn btn-danger remove">Remove</a></div>       <input type="number" name="id[]" id="id_' + i + '" hidden></div></p>'
             ).appendTo(medications);
         //i++;
         //return false;

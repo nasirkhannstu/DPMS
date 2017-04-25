@@ -11,7 +11,8 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                 <div class="card">
-                    <a href="{{route('medicine.index')}}"><button class="btn btn-info">Store</button></a>
+                    <a href="{{route('store.medicines')}}"><button class="btn btn-info">Store Medicines</button></a>
+                    <a href="{{route('medicine.index')}}"><button class="btn btn-info">Add Medicines</button></a>
                     <div class="header">
                         <h2>Prescription</h2>
                     </div>
@@ -33,7 +34,8 @@
                                             <td>#{{$pre->id}}</td>
                                             <td>{{$pre->doctor->user->first_name}} {{$pre->doctor->user->last_name}}</td>
                                             <td>{{$pre->patient->first_name}} {{$pre->patient->last_name}}</td>
-                                            <td><a href="{{route('invoice', $pre->id)}}"><button class="btn btn-info">Sell</button></a></td>
+                                            <td><a href="{{route('invoice', $pre->id)}}"><button class="btn btn-info">Sell Partial</button></a></td>
+                                            <td><a href="{{route('invoice.full', $pre->id)}}"><button class="btn btn-info">Sell Full</button></a></td>
                                         </tr>
                                         @endif
                                     @endforeach

@@ -7,6 +7,7 @@ use Sentinel;
 use Activation;
 use Mail;
 use App\User;
+use App\Doctor;
 
 class RegistrationController extends Controller
 {
@@ -26,11 +27,16 @@ class RegistrationController extends Controller
     	$user = Sentinel::registerAndActivate($credentials);
 
     	//$activation = Activation::create($user);
+        if($type === 'doctor'){
+            $doctor = new Doctor;
+            $doctor->user_id = $user->id;
+            $doctor->save();
+        }
 
-    	$role = Sentinel::findRoleBySlug($type);
-    	$role->users()->attach($user);
+        $role = Sentinel::findRoleBySlug($type);
+        $role->users()->attach($user);
 
-    	//$this->sendEmail($user, $activation->code);
+        //$this->sendEmail($user, $activation->code);
 
     	return redirect('/login');
     }

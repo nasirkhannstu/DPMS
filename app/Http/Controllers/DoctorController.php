@@ -12,7 +12,7 @@ use App\Information;
 class DoctorController extends Controller
 {
     public function index(){
-        $pres = Prescription::where('doctor_id', $user = Sentinel::getUser()->id)->get();
+        $pres = Prescription::where('doctor_id', $user = Sentinel::getUser()->doctor->id)->get();
     	//dd($pres);
         return view('doctor.index')->withPres($pres);
     }
@@ -46,13 +46,11 @@ class DoctorController extends Controller
     	}
     }    
     public function store($request){
-    	$doctor = Sentinel::getUser()->id;
-
-    	$hasInfo = new Doctor;
-    	$hasInfo->user_id = $doctor;
-    	$hasInfo->speciality = $request->speciality;
-    	$hasInfo->workplace = $request->workplace;
-    	$hasInfo->save();
+        $doctor = Sentinel::getUser()->id;
+        $doctor = Doctor::where('user_id', $doctor)->first();
+        $doctor->speciality = $request->speciality;
+        $doctor->workplace = $request->workplace;
+    	$doctor->save();
     }
     public function update($request){
     	$doctor = Sentinel::getUser()->id;

@@ -12,7 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	$complains = \App\Complain::all();
+	$complns = array();
+	foreach($complains as $v){
+        $complns[] = ['complain'=>$v->complain, 'doctor'=> \App\User::find($v->doctor_id), 'patient'=> \App\User::find($v->patient_id)];
+    }
+    return view('welcome')->withComplains($complns);
 });
 Route::group(['middleware' => 'visitors'], function(){
 	Route::get('/register', 'RegistrationController@register');
@@ -33,7 +38,7 @@ Route::post('/logout', 'LoginController@logout');
 			//Doctor Users
 Route::group(['middleware' => 'user'], function(){
 
-	Route::get('doctor', 'DoctorController@index');
+	Route::get('doctor', 'DoctorController@index')->name('doctor.index');
 	Route::get('doctor/edit-info','DoctorController@profileUpdate')->name('editInfo');
 	Route::post('doctor/edit-profesional-info','DoctorController@postInfoUpdate')->name('postProfessionalInfo');
 	Route::get('doctor/prescription','PrescriptionController@create')->name('getPrescription');
@@ -43,11 +48,14 @@ Route::group(['middleware' => 'user'], function(){
 
 
 Route::group(['middleware' => 'user'], function(){
-	Route::get('/patient', 'PatientController@index');
+	Route::get('/patient', 'PatientController@index')->name('patient.index');
+	Route::get('/patient/view-prescription/{id}', 'PatientController@presview')->name('pres.view');
 	Route::get('patient/find-doctor','PatientController@getFindDoctor')->name('getFindDoctor');
 	Route::post('patient/Search-Doctor','PatientController@postFindDoctor')->name('postFindDoctor');
 	Route::get('patient/message-doctor/{id}','PatientController@messageDoctor')->name('messageDoctor');
 	Route::post('patient/post-message-doctor/{id}','PatientController@postMessageDoctor')->name('postMessageDoctor');
+	Route::get('patient/complain/{id}','ComplainController@complain')->name('patient.complain');
+	Route::post('patient/post-complain/{id}','ComplainController@postcomplain')->name('patient.post.complain');
 });
 
 
@@ -61,7 +69,13 @@ Route::group(['middleware' => 'user'], function(){
 Route::group(['middleware' => 'user'], function(){
 	Route::get('/pharmacy', 'PharmacyController@index')->name('pharmacy');
 	Route::get('/pharmacy/invoice/{id}','PharmacyController@invoice')->name('invoice');
+	Route::get('/pharmacy/invoice-full/{id}','PharmacyController@invoiceFull')->name('invoice.full');
 	Route::post('/pharmacy/sell/{id}','PharmacyController@sell')->name('sell');
+
+
+	Route::get('/pharmacy/add-product-to-store/{id}','StoreController@storeAdd')->name('store.add');
+	Route::get('/pharmacy/store-medicines','StoreController@storemedicines')->name('store.medicines');
+	Route::post('/pharmacy/store-update/{id}','StoreController@storeUpdate')->name('store.update');
 
 	
 	Route::resource('/pharmacy/medicine','MedicineController');

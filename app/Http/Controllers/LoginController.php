@@ -24,7 +24,7 @@ class LoginController extends Controller
                     return redirect('/doctor');
                 }elseif($slug == 'patient'){
                     return redirect('/patient');
-                }elseif($slug == 'pharmacy'){
+                }elseif($slug == 'store'){
                     return redirect('/pharmacy');
                 }
             }else{

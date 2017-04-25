@@ -7,7 +7,7 @@
             <h2>DASHBOARD</h2>
         </div> -->
         <div class="row clearfix">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-8 col-md-offset-2">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                 <div class="card">
@@ -42,19 +42,20 @@
                                 @foreach($medics as $medic)
                                   <tr>
                                     <td>
-                                    <input type="text" name="mdcns[id][]" value="{{$medic['medicine']['name']}}">
+                                    <input type="hidden" name="mdcns[id][]" value="{{$medic['medicine']['name']}}">
+                                    {{$medic['medicine']['name']}}
                                     </td>
                                     <td>
                                       {{ $medic['qty']}}
                                     </td>
                                     <td>
-                                      <input name="mdcns[qty][]" 
+                                      <input type="hidden" name="mdcns[qty][]" 
                                       @if($medic['item'])
-                                      value="{{ $medic['remaining']}}" type="number" 
+                                      value="{{ $medic['remaining']}}"
                                       @else
-                                      value="0" type="hidden" 
-                                      @endif 
-                                      class="qty">
+                                      value="0"
+                                      @endif
+                                       class="qty">{{ $medic['remaining']}}
                                     </td>
                                     <td>
                                       @if($medic['item'])
@@ -65,11 +66,11 @@
                                     </td>
                                     <td>
                                       <span id="price" class="price">
-                                      @if($medic['item'])
-                                        {{ $medic['medicine']['price'] }}
-                                      @else
-                                      0
-                                      @endif
+                                        @if($medic['item'])
+                                          {{ $medic['medicine']['price'] }}
+                                        @else
+                                        0
+                                        @endif
                                       </span>
                                     </td>
                                     <td align="center"><span id="amount" class="amount">0</span> Taka
@@ -80,7 +81,7 @@
                                   <td colspan="4"></td>
                                   <td align="right">Total: </td>
                                   <td align="center"><u>
-                                  <input type="text" name="total" value="0" id="total" class="total">
+                                  <input type="text" name="total" value="0" id="total" class="total" disabled>
                                   </td> 
                                 </tr>
                               </tbody>
