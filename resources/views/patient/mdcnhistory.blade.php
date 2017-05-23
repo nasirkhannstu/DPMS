@@ -32,52 +32,44 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                 <div class="card">
+                    @include ('partials._message')
                     <div class="header">
-                        <h3>Doctors</h3>
+                        <h3>Disease and medication history</h3>
                     </div>
-                    <div class="search" style="margin-top:10px">
-                        <form action="{{route('postFindDoctor')}}" method="POST">
-                            {{ csrf_field() }}
-                        <div class="row control-group">
-                            <div class="col-md-6 col-md-offset-3">
-                                <div class="input-group">
-                                        <input type="text" name="search" class="form-control searchname" style="height:50px" placeholder="Search...">
-                                    
-                                    <span class="input-group-addon">
-                                        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        </form>
-                    </div>
+                    <hr>
                     <div class="body">
                         <div class="table-responsive">
                             <table class="table table-hover dashboard-task-infos">
                                 <thead>
                                     <tr>
                                         <th>#ID</th>
-                                        <th>Doctor Name</th>
-                                        <th>Work Place</th>
-                                        <th>Spciality</th>
+                                        <th>Syntoms</th>
+                                        <th>Medications</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($doctors as $doc)
-                                    <tr>
-                                        <td>{{$doc->id}}</td>
-                                        <td>{{$doc->first_name }} {{ $doc->last_name}}</td>
-                                        <td>{{@$doc->doctor->workplace}}</td>
-                                        <td>{{@$doc->doctor->speciality}}</td>
-                                        <td class="btn btn-default"><a href="{{route('messageDoctor', $doc->id) }}">Message</a></td>
-                                    </tr>
+                                    @foreach($pres as $pre)
+                                        @if(!empty($pre->syntoms))
+                                        <tr>
+                                            <td>{{$pre->id}}</td>
+                                            <td>{{$pre->syntoms}}</td>
+                                            <td><?php 
+                                                $medic = $pre->medications;
+                                                $medic = unserialize($medic);
+                                                foreach($medic as $meds){
+                                                    echo $meds['name']."(".$meds['qty']."), ";
+                                                }
+                                             ?></td>                               
+                                            <td>
+                                            <a href="{{route('pres.view', $pre->id)}}">View</a> |
+                                            <a href="{{route('patient.complain', $pre->doctor_id)}}">Complain</a>
+                                            </td>
+                                        </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>
-                            <div class="text-center">
-                                {!! $doctors->links() !!}
-                            </div>
                         </div>
                     </div>
                 </div>

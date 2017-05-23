@@ -18,6 +18,8 @@ class CreateDoctorsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('speciality')->nullable();
             $table->text('workplace')->nullable();
+            $table->string('vnbc')->nullable();
+            $table->string('pp')->nullable();
             $table->timestamps();
         });
     }

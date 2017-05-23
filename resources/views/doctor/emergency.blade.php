@@ -50,33 +50,28 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
                 <div class="card">
                     <div class="header">
-                        <h2>Your Prescriptions</h2>
+                        <h2>Emergency Patient</h2>
                     </div>
                     <div class="body">
-                        <div class="table-responsive">
-                            <table class="table table-hover dashboard-task-infos">
-                                <thead>
-                                    <tr>
-                                        <th>#PRESCRIPTION ID</th>
-                                        <th>#PATIENT_ID</th>
-                                        <th>Name</th>
-                                        <th>Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($pres as $pre)
-                                        @if($pre->medications)
-                                        <tr>
-                                            <td>{{$pre->id}}</td>
-                                            <td>{{$pre->patient_id}}</td>
-                                            <td>{{@$pre->patient->first_name}} {{@$pre->patient->last_name}}</td>
-                                            <td>{{$pre->created_at}}</td>
-                                        </tr>
-                                        @endif
-                                    @endforeach
-                                </tbody>
-                            </table>
+                    @include('partials._message')
+                    <form action="{{route('postEmergency')}}" method="POST">
+                        {{csrf_field()}}
+                        <div class="row">
+                            <br><br>
+                            <div class="col-md-6">
+                                <label>Name</label>
+                                <input type="text" name="name" class="form-control">
+                                <br>
+                                <label>National ID</label>
+                                <input type="number" name="nid" class="form-control">
+                                <br>
+                                <label>Age</label>
+                                <input type="number" name="age" class="form-control">
+                                <br>
+                                <input type="submit" value="submit" class="btn btn-success btn-block">
+                            </div>
                         </div>
+                    </form>
                     </div>
                 </div>
                 </div>

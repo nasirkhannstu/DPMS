@@ -32,6 +32,8 @@
                                   <tr>
                                       <th>Name</th>
                                       <th>Amount</th>
+                                      <th>Taken</th>
+                                      <th>To-take</th>
                                       <th>Remaining</th>
                                       <th>Available</th>
                                       <th>Price</th>
@@ -42,19 +44,25 @@
                                 @foreach($medics as $medic)
                                   <tr>
                                     <td>
-                                    <input type="text" name="mdcns[id][]" value="{{$medic['medicine']['name']}}">
+                                    <input type="text" name="mdcns[id][]" value="{{$medic['medicine']['name']}}" disabled style="border:none; background:white">
                                     </td>
                                     <td>
                                       {{ $medic['qty']}}
                                     </td>
                                     <td>
+                                      {{ $medic['qty'] - $medic['remaining'] }}
+                                    </td>
+                                    <td>
                                       <input name="mdcns[qty][]" 
                                       @if($medic['item'])
-                                      value="{{ $medic['remaining']}}" type="number" 
+                                      value="{{ $medic['remaining'] }}" type="number" 
                                       @else
                                       value="0" type="hidden" 
                                       @endif 
                                       class="qty">
+                                    </td>
+                                    <td>
+                                      {{ $medic['remaining'] }}
                                     </td>
                                     <td>
                                       @if($medic['item'])

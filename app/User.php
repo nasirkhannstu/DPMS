@@ -30,6 +30,9 @@ class User extends Authenticatable
     public function doctor(){
         return $this->hasOne('App\Doctor', 'user_id');
     }
+    public function information(){
+        return $this->hasOne('App\Information', 'user_id');
+    }
     public function prescription(){
         return $this->hasOne('App\Prescription', 'patient_id');
     }

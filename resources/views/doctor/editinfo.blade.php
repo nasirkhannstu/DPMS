@@ -13,7 +13,7 @@
             <div class="login-box">
                 <div class="panel panel-info" style="padding:10px">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Account Info</h3> 
+                        <h3 class="panel-title">Account Info</h3>
                     </div>
                     <form method="POST" action="{{route('postAccountInfo')}}">
                         {{ csrf_field() }}
@@ -48,7 +48,7 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Account Info</h3> 
                     </div>
-                    <form method="POST" action="{{route('postProfessionalInfo')}}">
+                    <form method="POST" action="{{route('postProfessionalInfo')}}" enctype="multipart/form-data">
                         {{ csrf_field() }}
                         <h1>Professional Info</h1><br>
                         <div class="input-group">
@@ -67,6 +67,22 @@
                                 <label>Work Place</label>
                                 <textarea class="form-control" name="workplace" placeholder="Work Place" required>@if($doctor){{ $doctor->workplace }} @endif </textarea>
                             </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="input-group">
+                            <div class="form-line">
+                                <label>VNBC Number</label>
+                                <input type="text" name="vnbc" 
+                                @if($doctor)
+                                Value="{{ $doctor->vnbc }}"
+                                @endif
+                                class="form-control" placeholder="VNBC number" required>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <input type="file" name="avatar" accept="image/*">
                         </div>
                         <br>
                         <div class="row">

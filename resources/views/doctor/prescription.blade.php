@@ -1431,15 +1431,8 @@ a.ui-button:active,
         return false;
 
     });
-
-    $('.strtPrep').on('click', '.remove', function () {
-        if (i > 2) {
-            $(this).parents('p').remove();
-            i--;
-        }
-        return false;
+    $(document).on('click','.remove',function() {
+         $(this).closest("div.row").remove();
     });
-
-
 </script>
 @endsection

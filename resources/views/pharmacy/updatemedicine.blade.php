@@ -17,7 +17,7 @@
                     <hr>
                     <div class="body">
                         @include ('partials._message')
-                        <form action="{{route('medicine.update', $medicine->id)}}" method="PUT">
+                        <form action="{{route('medicine.updatemed', $medicine->id)}}" method="POST">
                         {{ csrf_field() }}
                         <div class="row">
                             <div class="col-md-12">
@@ -30,12 +30,6 @@
                             </div>
                             <div class="col-md-6">
                                 <input type="number" name="price" class="form-control" placeholder="Price" value="{{$medicine->price}}"><br>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-md-offset-3">
-                                <label>Quantity</label>
-                                <input type="number" name="qty" class="form-control" placeholder="Quantity" value="{{$medicine->qty}}"><br>
                             </div>
                         </div>
                            <input type="submit" value="Update" class="btn btn-success pull-left btn-block">

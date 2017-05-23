@@ -26,10 +26,14 @@ class PatientController extends Controller
         }
         return view('patient.presview')->withMedics($med)->withId($id);
     }
+    public function medicationHistory(){
+    	$pres = Prescription::where('patient_id', '=', Sentinel::getUser()->id)->get();
+        return view('patient.mdcnhistory')->withPres($pres);
+    }
     public function getFindDoctor(){
-    	$role = Sentinel::findRoleBySlug('doctor');
-    	$doctors = $role->users()->with('roles')->paginate(10);
-    	return view('patient.finddoctor')->withDoctors($doctors);
+        $role = Sentinel::findRoleBySlug('doctor');
+        $doctors = $role->users()->with('roles')->paginate(10);
+        return view('patient.finddoctor')->withDoctors($doctors);
     }
     public function postFindDoctor(Request $request){
     	$key = $request->search;
@@ -41,14 +45,15 @@ class PatientController extends Controller
     	return view('patient.doctorMessage')->withUser($user);
     }
     public function postMessageDoctor(Request $request, $id){
-    	$this->validate($request, [
-			'message' => 'required|min:5|max:1000'
-		]);
+        //dd($id);
+        $this->validate($request, [
+            'message' => 'required|min:5|max:1000'
+        ]);
     	$pres = new Prescription;
     	$pres->message = $request->message;
     	$pres->doctor_id = $id;
     	$pres->patient_id = $user = Sentinel::getUser()->id;
     	$pres->save();
-    	return redirect()->route('messageDoctor', $id);
+    	return redirect()->route('getFindDoctor');
     }
 }

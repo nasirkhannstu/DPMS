@@ -4498,6 +4498,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default {
   background-color: #f8f8f8;
   border-color: #e7e7e7;
+  border-top: 1px solid #dedede;
 }
 .navbar-default .navbar-brand {
   color: #777;
@@ -5498,6 +5499,7 @@ button.list-group-item-danger.active:focus {
 .panel > .panel-collapse > .list-group .list-group-item {
   border-width: 1px 0;
   border-radius: 0;
+
 }
 .panel > .list-group:first-child .list-group-item:first-child,
 .panel > .panel-collapse > .list-group:first-child .list-group-item:first-child {
@@ -6599,6 +6601,9 @@ button.close {
   .visible-xs-inline-block {
     display: inline-block !important;
   }
+  .headmenu{
+    text-align: center;
+  } 
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .visible-sm {

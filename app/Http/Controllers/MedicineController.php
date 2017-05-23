@@ -24,8 +24,7 @@ class MedicineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create(){
         return view('pharmacy.createmedicine');
     }
 
@@ -35,20 +34,18 @@ class MedicineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
+        //dd('store');
         $this->validate($request, array(
                 'name'          => 'required|max:255|unique:medicines,name',
                 'brand'    => 'required|max:255',
-                'price'    => 'required|integer',
-                'qty'    => 'required|integer'
+                'price'    => 'required|integer'
             ));
         //Store in the database
         $medicine = new Medicine;
         $medicine->name = $request->name;
         $medicine->brand = $request->brand;
         $medicine->price = $request->price;
-        $medicine->qty = $request->qty;
         $medicine->save();
 
 
@@ -64,8 +61,7 @@ class MedicineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id){
         $medicine = Medicine::find($id);
         return view('pharmacy.showmedicine')->withMedicine($medicine);
 
@@ -77,8 +73,7 @@ class MedicineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
         $medicine = Medicine::find($id);
         return view('pharmacy.updatemedicine')->withMedicine($medicine);
     }
@@ -90,27 +85,25 @@ class MedicineController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function medicineUpdatemed(Request $request, $id)
     {
-        dd($request);
+        //dd('update'.$id);
         $this->validate($request, array(
-                'name'          => 'required|max:255|unique:medicines,name',
+                'name'          => "required|max:255|unique:medicines,name,$id",
                 'brand'    => 'required|max:255',
-                'price'    => 'required|integer',
-                'qty'    => 'required|integer'
+                'price'    => 'required|integer'
             ));
         //Store in the database
         $medicine = Medicine::find($id);
         $medicine->name = $request->name;
         $medicine->brand = $request->brand;
         $medicine->price = $request->price;
-        $medicine->qty = $request->qty;
         $medicine->save();
 
         Session::flash('success',"The Medicine $medicine->name was successfully Updated!");
 
         //redirect to another page
-        return redirect()->route('medicine.index', $medicine->id);
+        return redirect()->route('medicine.edit', $medicine->id);
     }
 
     /**

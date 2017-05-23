@@ -16,6 +16,17 @@ class PharmacyController extends Controller
         $pres = Prescription::orderBy('id', 'desc')->get();
         return view('pharmacy.index')->withPres($pres);
     }
+    public function presSearch(Request $request){
+        $search = ' ';
+        if($request->search){
+            return redirect()->route('getPresSearch', $request->search);
+        }
+        return redirect()->route('getPresSearch', $search);
+    }
+    public function getPresSearch($s){
+        $search = Prescription::where('id','LIKE','%'.$s.'%')->get();
+        return view('pharmacy.pressearch')->withPres($search);
+    }
     public function invoice($id){
         $pre = Prescription::find($id);
         $medic = $pre->medications;
@@ -70,6 +81,6 @@ class PharmacyController extends Controller
             
         }
         
-        return redirect()->route('pharmacy');
+        return redirect()->route('pharmacy')->with('success', 'Invoice Complited');
     }
 }

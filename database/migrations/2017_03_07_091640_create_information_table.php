@@ -23,6 +23,8 @@ class CreateInformationTable extends Migration
             $table->string('phone')->nullable();
             $table->string('fb')->nullable();
             $table->string('photo')->nullable();
+            $table->integer('nid')->nullable();
+            $table->string('age')->nullable();
             $table->timestamps();
         });
     }

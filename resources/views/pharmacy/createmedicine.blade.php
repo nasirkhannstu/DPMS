@@ -31,11 +31,6 @@
                                 <input type="number" name="price" class="form-control" placeholder="Price"><br>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="number" name="qty" class="form-control" placeholder="Quantity"><br>
-                            </div>
-                        </div>
                            <input type="submit" name="addmedicine" value="+ Add" class="btn btn-success pull-left btn-block">
                         </form>
                     </div>

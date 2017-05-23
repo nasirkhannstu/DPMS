@@ -9,18 +9,21 @@
         <div class="row clearfix">
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
             <div class="thumbnail">
-                <img class="activator" src="{{url('images/user.jpg')}}">
                 <div class="caption">
-                    <h3 style="color:#73879C">
-                        <span class="glyphicon glyphicon-user"></span>
-                        Patient {{ Sentinel::getUser()->first_name }} {{ Sentinel::getUser()->last_name }}
-                    </h3>
-                    <p style="color:#73879C">
-                        <span class="glyphicon glyphicon-envelope"></span>
-                        {{ Sentinel::getUser()->email }}
+                    <p>
+                        <a href="{{route('patient.index')}}" class="btn btn-primary waves-effect" role="button">Personal Details</a>
                     </p>
                     <p>
-                        <a href="{{route('getFindDoctor')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-search"></span> Find Doctor</a>
+                        <a href="{{route('medication.history')}}" class="btn btn-primary waves-effect" role="button">Medication history</a>
+                    </p>
+                    <p>
+                        <a href="{{route('getFindDoctor')}}" class="btn btn-primary waves-effect" role="button"> Find Doctor</a>
+                    </p>
+                    <p>
+                        <a href="" class="btn btn-primary waves-effect" role="button">Lab Text report</a>
+                    </p>
+                    <p>
+                        <a href="{{route('edit.Patient.Info')}}" class="btn btn-primary waves-effect" role="button">Edit Information</a>
                     </p>
                 </div>
             </div>
@@ -64,11 +67,11 @@
                                 <tbody>
                                     @foreach($doctors as $doc)
                                     <tr>
-                                        <td><span class="label bg-green">{{$doc->id}}</span></td>
+                                        <td><span class="label bg-green">{{$doc->user->id}}</span></td>
                                         <td>{{$doc->user->first_name }} {{ $doc->user->last_name}}</td>
                                         <td>{{@$doc->workplace}}</td>
                                         <td>{{@$doc->speciality}}</td>
-                                        <td class="btn btn-default"><a href="{{route('messageDoctor', $doc->user_id) }}">Message</a></td>
+                                        <td class="btn btn-default"><a href="{{route('messageDoctor', $doc->user->id) }}">Message</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

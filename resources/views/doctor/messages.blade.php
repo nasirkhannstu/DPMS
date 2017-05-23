@@ -47,34 +47,36 @@
         </div>
         <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="card">
+                    @include ('partials._message')
                     <div class="header">
-                        <h2>Your Prescriptions</h2>
+                        <h2>Your Messages</h2>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
                             <table class="table table-hover dashboard-task-infos">
                                 <thead>
                                     <tr>
-                                        <th>#PRESCRIPTION ID</th>
-                                        <th>#PATIENT_ID</th>
+                                        
+                                        <th>#PATIENT ID</th>
                                         <th>Name</th>
+                                        <th>Message</th>
                                         <th>Date</th>
+                                        <!-- <th></th> -->
                                     </tr>
                                 </thead>
-                                <tbody>
                                     @foreach($pres as $pre)
-                                        @if($pre->medications)
+                                        @if($pre->message)
                                         <tr>
-                                            <td>{{$pre->id}}</td>
                                             <td>{{$pre->patient_id}}</td>
                                             <td>{{@$pre->patient->first_name}} {{@$pre->patient->last_name}}</td>
+                                            <td>{{$pre->message}}</td>
                                             <td>{{$pre->created_at}}</td>
+                                            <!-- <td><button class="btn btn-success">Prescribe</button></td> -->
                                         </tr>
                                         @endif
                                     @endforeach
-                                </tbody>
                             </table>
                         </div>
                     </div>

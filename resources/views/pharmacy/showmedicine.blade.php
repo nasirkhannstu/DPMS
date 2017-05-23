@@ -30,11 +30,6 @@
                                 <h5>Price: {{$medicine->price}}</h5>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>Quantity: {{$medicine->qty}}</h6>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 </div>

@@ -9,18 +9,21 @@
         <div class="row clearfix">
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
             <div class="thumbnail">
-                <img class="activator" src="images/user.jpg">
                 <div class="caption">
-                    <h3 style="color:#73879C">
-                        <span class="glyphicon glyphicon-user"></span>
-                        Patient {{ Sentinel::getUser()->first_name }} {{ Sentinel::getUser()->last_name }}
-                    </h3>
-                    <p style="color:#73879C">
-                        <span class="glyphicon glyphicon-envelope"></span>
-                        {{ Sentinel::getUser()->email }}
+                    <p>
+                        <a href="{{route('patient.index')}}" class="btn btn-primary waves-effect" role="button">Personal Details</a>
                     </p>
                     <p>
-                        <a href="{{route('getFindDoctor')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-edit"></span> Find Doctor</a>
+                        <a href="{{route('medication.history')}}" class="btn btn-primary waves-effect" role="button">Medication history</a>
+                    </p>
+                    <p>
+                        <a href="{{route('getFindDoctor')}}" class="btn btn-primary waves-effect" role="button"> Find Doctor</a>
+                    </p>
+                    <p>
+                        <a href="" class="btn btn-primary waves-effect" role="button">Lab Text report</a>
+                    </p>
+                    <p>
+                        <a href="{{route('edit.Patient.Info')}}" class="btn btn-primary waves-effect" role="button">Edit Information</a>
                     </p>
                 </div>
             </div>
@@ -31,43 +34,28 @@
                 <div class="card">
                     @include ('partials._message')
                     <div class="header">
-                        <h3>Your Prescriptions</h3>
+                        <h3>Personal Information</h3>
                     </div>
                     <div class="body">
-                        <div class="table-responsive">
-                            <table class="table table-hover dashboard-task-infos">
-                                <thead>
-                                    <tr>
-                                        <th>#ID</th>
-                                        <th>Syntoms</th>
-                                        <th>Medications</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($pres as $pre)
-                                        @if(!empty($pre->syntoms))
-                                        <tr>
-                                            <td>{{$pre->id}}</td>
-                                            <td>{{$pre->syntoms}}</td>
-                                            <td><?php 
-                                                $medic = $pre->medications;
-                                                $medic = unserialize($medic);
-                                                foreach($medic as $meds){
-                                                    echo $meds['name']."(".$meds['qty']."), ";
-                                                }
-                                             ?></td>                               
-                                            <td>
-                                            <a href="{{route('pres.view', $pre->id)}}">View</a>
-                                            <a href="{{route('patient.complain', $pre->doctor_id)}}">Complain</a>
-                                            </td>
-                                        </tr>
-                                        @endif
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                        @if(isset(Sentinel::getUser()->information))
+                        <img class="activator" src="{{url('uploads/pp/'.Sentinel::getUser()->information->photo)}}" style="width:200px">
+                        <br><br>
+                        <strong>Your Id: #{{ Sentinel::getUser()->id }}</strong>
+                        <br>
+                        Name:{{ Sentinel::getUser()->first_name }} {{ Sentinel::getUser()->last_name }}
+                        <br>
+                        Sex: {{ Sentinel::getUser()->information->gender}}
+                        <br>
+                        Age: {{ Sentinel::getUser()->information->age}}
+                        <br>
+                        Present Address: {{ Sentinel::getUser()->information->address}}
+                        <br>
+                        Parmanent Address: {{ Sentinel::getUser()->information->paddress}}
+                        <br>
+                        NID: {{ Sentinel::getUser()->information->nid}}
+                        @endif
                     </div>
+                    <hr>
                 </div>
                 </div>
             </div>

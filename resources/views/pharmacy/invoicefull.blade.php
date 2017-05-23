@@ -32,6 +32,8 @@
                                   <tr>
                                       <th>Name</th>
                                       <th>Amount</th>
+                                      <th>Taken</th>
+                                      <th>To-take</th>
                                       <th>Remaining</th>
                                       <th>Available</th>
                                       <th>Price</th>
@@ -42,11 +44,14 @@
                                 @foreach($medics as $medic)
                                   <tr>
                                     <td>
-                                    <input type="hidden" name="mdcns[id][]" value="{{$medic['medicine']['name']}}">
+                                    <input type="hidden" name="mdcns[id][]" value="{{$medic['medicine']['name']}}" disabled style="border:none; background:white">
                                     {{$medic['medicine']['name']}}
                                     </td>
                                     <td>
                                       {{ $medic['qty']}}
+                                    </td>
+                                    <td>
+                                      {{ $medic['qty'] - $medic['remaining'] }}
                                     </td>
                                     <td>
                                       <input type="hidden" name="mdcns[qty][]" 
@@ -56,6 +61,9 @@
                                       value="0"
                                       @endif
                                        class="qty">{{ $medic['remaining']}}
+                                    </td>
+                                    <td>
+                                      {{ $medic['remaining'] }}
                                     </td>
                                     <td>
                                       @if($medic['item'])

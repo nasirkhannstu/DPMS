@@ -24,6 +24,15 @@ class PrescriptionController extends Controller
             'qty.*' => 'integer|required|numeric',
             'id.*' => 'integer|required|numeric'
         ]);
+        if(Sentinel::findById($request->patient_id)){
+            if(Sentinel::findById($request->patient_id)->inRole('doctor')){
+                return redirect()->back()->with('success', 'Patient Not found');
+            }
+        }else{
+             return redirect()->back()->with('success', 'Patient Not found');
+        }
+        
+
         $name = $request->name;
         $qty = $request->qty;
         $id = $request->id;

@@ -6,18 +6,21 @@
         <div class="row clearfix">
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
             <div class="thumbnail">
-                <img class="activator" src="{{url('images/user.jpg')}}">
                 <div class="caption">
-                    <h3 style="color:#73879C">
-                        <span class="glyphicon glyphicon-user"></span>
-                        Patient {{ Sentinel::getUser()->first_name }} {{ Sentinel::getUser()->last_name }}
-                    </h3>
-                    <p style="color:#73879C">
-                        <span class="glyphicon glyphicon-envelope"></span>
-                        {{ Sentinel::getUser()->email }}
+                    <p>
+                        <a href="{{route('patient.index')}}" class="btn btn-primary waves-effect" role="button">Personal Details</a>
                     </p>
                     <p>
-                        <a href="{{route('getFindDoctor')}}" class="btn btn-primary waves-effect" role="button"><span class="glyphicon glyphicon-search"></span> Find Doctor</a>
+                        <a href="{{route('medication.history')}}" class="btn btn-primary waves-effect" role="button">Medication history</a>
+                    </p>
+                    <p>
+                        <a href="{{route('getFindDoctor')}}" class="btn btn-primary waves-effect" role="button"> Find Doctor</a>
+                    </p>
+                    <p>
+                        <a href="" class="btn btn-primary waves-effect" role="button">Lab Text report</a>
+                    </p>
+                    <p>
+                        <a href="{{route('edit.Patient.Info')}}" class="btn btn-primary waves-effect" role="button">Edit Information</a>
                     </p>
                 </div>
             </div>
@@ -33,7 +36,7 @@
                     <div class="body">
                         <br>
                         <div class="search" style="margin-top:10px">
-                            <form action="{{route('postMessageDoctor', $user->id)}}" method="POST">
+                            <form action="{{route('postMessageDoctor', $user->doctor->id)}}" method="POST">
                                 {{ csrf_field() }}
                             <div class="row control-group">
                                 <div class="col-md-6 col-md-offset-2">
