@@ -14,6 +14,7 @@
                   @include ('partials._message')
                     <div class="header">
                         <h2>Invoice</h2>
+                        <!-- <input type="button" value="Print" onclick="window.print()"> -->
                     </div>
                     <div class="body">
                       <div class="row">
@@ -35,9 +36,9 @@
                                       <th>Taken</th>
                                       <th>To-take</th>
                                       <th>Remaining</th>
-                                      <th>Available</th>
+                                      <!-- <th>Available</th>
                                       <th>Price</th>
-                                      <th><span id="amount" class="amount">Total</span></th>
+                                      <th><span id="amount" class="amount">Total</span></th> -->
                                   </tr>
                               </thead>
                               <tbody>
@@ -64,7 +65,7 @@
                                     <td>
                                       {{ $medic['remaining'] }}
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                       @if($medic['item'])
                                       {{$medic['item']['qty']}}
                                       @else
@@ -81,16 +82,16 @@
                                       </span>
                                     </td>
                                     <td align="center"><span id="amount" class="amount">0</span> Taka
-                                    </td>
+                                    </td> -->
                                   </tr>
                                 @endforeach
-                                <tr>
+                                <!-- <tr>
                                   <td colspan="4"></td>
                                   <td align="right">Total: </td>
                                   <td align="center"><u>
                                   <input type="text" name="total" value="0" id="total" class="total">
                                   </td> 
-                                </tr>
+                                </tr> -->
                               </tbody>
                           </table>
                           <input type="submit" class="btn btn-success" value="Sell">
@@ -107,24 +108,24 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-    function calculator() {
-        var amt = $('.amount:gt(0)'),
-            tot = $('#total');
-        amt.text(function () {
-            var tr = $(this).closest('tr');
-            var qty = tr.find('.qty').val();
-            var price = tr.find('.price').html();
-            return parseFloat(qty) * parseFloat(price);
-        });
-        tot.val(function () {
-            var sum = 0;
-            amt.each(function () {
-                sum += parseFloat($(this).text())
-            });
-            return sum;
-        });
-    }
-    calculator();
-    $('.qty,.price').change(calculator);
+    // function calculator() {
+    //     var amt = $('.amount:gt(0)'),
+    //         tot = $('#total');
+    //     amt.text(function () {
+    //         var tr = $(this).closest('tr');
+    //         var qty = tr.find('.qty').val();
+    //         var price = tr.find('.price').html();
+    //         return parseFloat(qty) * parseFloat(price);
+    //     });
+    //     tot.val(function () {
+    //         var sum = 0;
+    //         amt.each(function () {
+    //             sum += parseFloat($(this).text())
+    //         });
+    //         return sum;
+    //     });
+    // }
+    // calculator();
+    // $('.qty,.price').change(calculator);
 </script>
 @endsection

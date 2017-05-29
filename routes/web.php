@@ -37,6 +37,12 @@ Route::post('/logout', 'LoginController@logout');
 
 Route::group(['middleware' => 'user'], function(){
 	Route::get('doctor', 'DoctorController@index')->name('doctor.index');
+
+	Route::get('doctor/prescription-view/{id}', 'DoctorController@doctorPresView')->name('doctorPresView');
+
+	Route::get('doctor/prescription-search/{s}', 'DoctorController@getDocPresSearch')->name('getDocPresSearch');
+	Route::post('doctor/post-prescription-search', 'DoctorController@docPresSearch')->name('docPresSearch');
+
 	Route::get('doctor/edit-info','DoctorController@profileUpdate')->name('editInfo');
 	Route::post('doctor/edit-profesional-info','DoctorController@postInfoUpdate')->name('postProfessionalInfo');
 	Route::get('doctor/prescription','PrescriptionController@create')->name('getPrescription');

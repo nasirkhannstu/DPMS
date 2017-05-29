@@ -8,6 +8,7 @@ use App\Doctor;
 use App\Prescription;
 use App\User;
 use App\Information;
+use App\Medicine;
 use Image;
 
 class DoctorController extends Controller
@@ -15,6 +16,41 @@ class DoctorController extends Controller
     public function index(){
         $pres = Prescription::where('doctor_id', $user = Sentinel::getUser()->doctor->id)->get();
         return view('doctor.index')->withPres($pres);
+    }
+    public function doctorPresView($id){
+        $pre = Prescription::find($id);
+        $medic = $pre->medications;
+        $medic = unserialize($medic);
+
+        $med = array();
+        foreach($medic as $key => $v){
+            $med[] = ['qty'=>$v['qty'], 'remaining'=>$v['remaining'], 'item'=> Medicine::find($v['id'])];
+        }
+        return view('doctor.presview')->withMedics($med)->withPre($pre);
+    }
+    public function docPresSearch(Request $request){
+        $search = ' ';
+        if($request->search){
+            return redirect()->route('getDocPresSearch', $request->search);
+        }
+        return redirect()->route('getDocPresSearch', $search);
+    }
+    public function getDocPresSearch($s){
+        $prescription = array();
+        $searchs = Prescription::where('doctor_id', $user = Sentinel::getUser()->doctor->id)->where('id','LIKE','%'.$s.'%')->get();
+        foreach($searchs as $search){
+            array_push($prescription, $search);
+        }
+        if($nid = Information::where('nid', $s)->first()){
+        $user = User::find($nid->user_id);
+        foreach($user->prescription as $pres){
+            if($pres->doctor_id == Sentinel::getUser()->doctor->id){
+                array_push($prescription, $pres);
+            }
+        }
+        }
+        //dd($prescription);
+        return view('doctor.pressearch')->withPres($prescription);
     }
     public function messages(){
         $pres = Prescription::where('doctor_id', $user = Sentinel::getUser()->doctor->id)->get();
@@ -43,7 +79,7 @@ class DoctorController extends Controller
         $userinfo->age = $request->age;
         $userinfo->save();
 
-        return view('doctor.emergency');
+        return redirect()->route('emergency')->with('success', 'New Patient Created Successfully. #ID = '.$user->id);
     }
     public function profileUpdate(){
     	$user = Sentinel::getUser()->id;

@@ -34,6 +34,6 @@ class User extends Authenticatable
         return $this->hasOne('App\Information', 'user_id');
     }
     public function prescription(){
-        return $this->hasOne('App\Prescription', 'patient_id');
+        return $this->hasMany('App\Prescription', 'patient_id');
     }
 }

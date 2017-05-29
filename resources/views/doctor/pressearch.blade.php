@@ -78,9 +78,7 @@
                                         <th>#PRESCRIPTION ID</th>
                                         <th>#PATIENT_ID</th>
                                         <th>Name</th>
-                                        <th>NID</th>
                                         <th>Date</th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -90,9 +88,7 @@
                                             <td>{{$pre->id}}</td>
                                             <td>{{$pre->patient_id}}</td>
                                             <td>{{@$pre->patient->first_name}} {{@$pre->patient->last_name}}</td>
-                                            <td>{{@$pre->patient->information->nid}}</td>
                                             <td>{{$pre->created_at}}</td>
-                                            <td class="btn btn-info"><a href="{{route('doctorPresView', $pre->id)}}">view</a></td>
                                         </tr>
                                         @endif
                                     @endforeach

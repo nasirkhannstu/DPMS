@@ -22,9 +22,9 @@
                             <div class="col-md-8">
                                 <br>
                                 <form action="{{route('presSearch')}}" method="POST">
-                                    {{csrf_field()}}
+                                    {{ csrf_field() }}
                                     <div class="input-group">
-                                        <input type="text" name="search" class="form-control" placeholder="Search with #ID">
+                                        <input type="number" name="search" class="form-control" placeholder="Search with #ID">
                                     <span class="input-group-addon">
                                         <button type="submit"><span class="glyphicon glyphicon-search"></span></button>
                                     </span>
